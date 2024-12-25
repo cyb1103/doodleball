@@ -15,5 +15,5 @@ public interface DoodleBallPlayerService {
     /**
      * 更新用户信息
      */
-    void updatePlayer(DoodleBallPlayer doodleBallPlayer);
+    void updatePlayer(int platform, String openId, DoodleBallPlayer doodleBallPlayer);
 }

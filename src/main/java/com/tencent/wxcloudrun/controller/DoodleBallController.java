@@ -46,7 +46,7 @@ public class DoodleBallController {
     public ApiResponse upsertPlayer(@RequestHeader("x-wx-openid")String openId,
             @RequestBody DoodleBallPlayer player) {
         log.info("upsertPlayer: openId={}, player={}", openId, player);
-        doodleBallPlayerService.updatePlayer(player);
+        doodleBallPlayerService.updatePlayer(0,openId,player);
         return ApiResponse.ok();
     }
 

@@ -5,7 +5,6 @@ import com.tencent.wxcloudrun.model.DoodleBallPlayer;
 import com.tencent.wxcloudrun.service.DoodleBallPlayerService;
 import java.time.LocalDateTime;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 /**
  * @author 常源博
@@ -43,8 +42,10 @@ public class DoodleBallPlayerServiceImpl implements DoodleBallPlayerService {
     }
 
     @Override
-    public void updatePlayer(DoodleBallPlayer doodleBallPlayer) {
+    public void updatePlayer(int platform, String openId, DoodleBallPlayer doodleBallPlayer) {
         // 可更新字段：achievement, topScore, money, lastLogin
+        DoodleBallPlayer player = getPlayerByPlatformAndOpenId(platform, openId, null, null);
+    doodleBallPlayer.setId(player.getId());
         doodleBallPlayerMapper.upsertPlayer(doodleBallPlayer);
     }
 }

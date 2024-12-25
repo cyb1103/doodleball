@@ -35,8 +35,7 @@
                 `last_login` = #{lastLogin},
             </if>
         </set>
-        WHERE `platform` = #{platform}
-        AND `open_id` = #{openId}
+        WHERE `id`= #{id}
     </update>
     <insert id="insertPlayer" parameterType="com.tencent.wxcloudrun.model.DoodleBallPlayer">
         INSERT INTO doodle_ball_player(`platform`, `open_id`, `union_id`, `achievement`, `top_score`, `money`,
