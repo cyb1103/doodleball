@@ -5,6 +5,7 @@ import com.tencent.wxcloudrun.model.DoodleBallPlayer;
 import com.tencent.wxcloudrun.service.DoodleBallPlayerService;
 import java.time.LocalDateTime;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 /**
  * @author 常源博
@@ -12,20 +13,22 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class DoodleBallPlayerServiceImpl implements DoodleBallPlayerService {
-     final DoodleBallPlayerMapper doodleBallPlayerMapper;
+    final DoodleBallPlayerMapper doodleBallPlayerMapper;
 
     public DoodleBallPlayerServiceImpl(DoodleBallPlayerMapper mapper) {
         doodleBallPlayerMapper = mapper;
     }
 
     @Override
-    public DoodleBallPlayer getPlayerByPlatformAndOpenId(Integer platform, String openId) {
+    public DoodleBallPlayer getPlayerByPlatformAndOpenId(Integer platform, String openId, String unionId, String fields) {
         DoodleBallPlayer player = doodleBallPlayerMapper.getPlayerByPlatformAndOpenId(platform, openId);
         // 用户不存在则新建
         if (player == null) {
+            // 获取用户union id;
             player = new DoodleBallPlayer();
             player.setPlatform(platform);
             player.setOpenId(openId);
+            player.setUnionId(unionId);
             player.setAchievement("");
             player.setTopScore(0);
             player.setMoney(0);
@@ -34,12 +37,14 @@ public class DoodleBallPlayerServiceImpl implements DoodleBallPlayerService {
             player.setCreatedAt(null);
             player.setUpdatedAt(null);
             doodleBallPlayerMapper.insertPlayer(player);
+            player = doodleBallPlayerMapper.getPlayerByPlatformAndOpenId(platform, openId);
         }
         return player;
     }
 
     @Override
-    public void upsertPlayer(DoodleBallPlayer doodleBallPlayer) {
-
+    public void updatePlayer(DoodleBallPlayer doodleBallPlayer) {
+        // 可更新字段：achievement, topScore, money, lastLogin
+        doodleBallPlayerMapper.upsertPlayer(doodleBallPlayer);
     }
 }

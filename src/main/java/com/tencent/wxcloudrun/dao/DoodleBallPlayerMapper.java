@@ -10,6 +10,10 @@ import org.apache.ibatis.annotations.Param;
 public interface DoodleBallPlayerMapper {
     DoodleBallPlayer getPlayerByPlatformAndOpenId(@Param("platform") Integer platform, @Param("openId") String openId);
 
+    /**
+     * 只能更新achievement, topScore, money, lastLogin
+     * @param doodleBallPlayer 玩家信息
+     */
     void upsertPlayer(DoodleBallPlayer doodleBallPlayer);
 
     void insertPlayer(DoodleBallPlayer player);

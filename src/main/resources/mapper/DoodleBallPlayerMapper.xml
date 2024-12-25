@@ -19,7 +19,25 @@
         WHERE platform = #{platform}
           and open_id = #{openId}
     </select>
-
+    <update id="upsertPlayer" parameterType="com.tencent.wxcloudrun.model.DoodleBallPlayer">
+        UPDATE doodle_ball_player
+        <set>
+            <if test="achievement != null">
+                `achievement` = #{achievement},
+            </if>
+            <if test="topScore != null">
+                `top_score` = #{topScore},
+            </if>
+            <if test="money != null">
+                `money` = #{money},
+            </if>
+            <if test="lastLogin != null">
+                `last_login` = #{lastLogin},
+            </if>
+        </set>
+        WHERE `platform` = #{platform}
+        AND `open_id` = #{openId}
+    </update>
     <insert id="insertPlayer" parameterType="com.tencent.wxcloudrun.model.DoodleBallPlayer">
         INSERT INTO doodle_ball_player(`platform`, `open_id`, `union_id`, `achievement`, `top_score`, `money`,
                                        `registration_date`, `last_login`)

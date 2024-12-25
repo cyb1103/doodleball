@@ -10,10 +10,10 @@ public interface DoodleBallPlayerService {
     /**
      * 获取用户信息或创建新用户并返回
      */
-    DoodleBallPlayer getPlayerByPlatformAndOpenId(Integer platform, String openId);
+    DoodleBallPlayer getPlayerByPlatformAndOpenId(Integer platform, String openId, String unionId, String fields);
 
     /**
      * 更新用户信息
      */
-    void upsertPlayer(DoodleBallPlayer doodleBallPlayer);
+    void updatePlayer(DoodleBallPlayer doodleBallPlayer);
 }
