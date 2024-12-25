@@ -6,10 +6,10 @@
     <select id="getPlayerByPlatformAndOpenId" resultMap="doodleBallPlayer">
         SELECT `id`,
                `platform`,
-               `openId`,
-               `unionId`,
+               `open_id`,
+               `union_id`,
                `achievement`,
-               `topScore`,
+               `top_score`,
                `money`,
                `registration_date`,
                `last_login`,
@@ -21,7 +21,7 @@
     </select>
 
     <insert id="upsertPlayer" parameterType="com.tencent.wxcloudrun.model.DoodleBallPlayer">
-        INSERT INTO doodle_ball_player(`platform`, `openId`, `unionId`, `achievement`, `topScore`, `money`,
+        INSERT INTO doodle_ball_player(`platform`, `open_id`, `union_id`, `achievement`, `top_score`, `money`,
                                        `registration_date`, `last_login`)
         VALUES (#{platform}, #{openId}, #{unionId}, #{achievement}, #{topScore}, #{money}, #{registrationDate},
                 #{lastLogin})
