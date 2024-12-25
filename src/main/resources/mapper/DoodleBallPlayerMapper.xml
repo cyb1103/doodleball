@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tencent.wxcloudrun.dao.DoodleBallPlayerMapper">
+    <resultMap id="doodleBallPlayer" type="com.tencent.wxcloudrun.model.DoodleBallPlayer">
+    </resultMap>
+    <select id="getPlayerByPlatformAndOpenId" resultMap="doodleBallPlayer">
+        SELECT `id`,
+               `platform`,
+               `openId`,
+               `unionId`,
+               `achievement`,
+               `topScore`,
+               `money`,
+               `registration_date`,
+               `last_login`,
+               `created_at`,
+               `updated_at`
+        FROM doodle_ball_player
+        WHERE platform = #{platform}
+          and openId = #{openId}
+    </select>
+
+    <insert id="upsertPlayer" parameterType="com.tencent.wxcloudrun.model.DoodleBallPlayer">
+        INSERT INTO doodle_ball_player(`platform`, `openId`, `unionId`, `achievement`, `topScore`, `money`,
+                                       `registration_date`, `last_login`)
+        VALUES (#{platform}, #{openId}, #{unionId}, #{achievement}, #{topScore}, #{money}, #{registrationDate},
+                #{lastLogin})
+        ON DUPLICATE KEY UPDATE achievement = #{achievement}, topScore = #{topScore}, money = #{money},
+                                last_login = #{lastLogin}
+    </insert>
+</mapper>

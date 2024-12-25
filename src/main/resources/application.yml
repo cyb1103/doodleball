@@ -14,4 +14,7 @@ spring:
       prefix: /
 
 mybatis:
+  # 自动下划线转驼峰
+  configuration:
+    map-underscore-to-camel-case: true
   mapper-locations: classpath*:mapper/*Mapper.xml
