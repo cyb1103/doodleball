@@ -17,7 +17,7 @@
                `updated_at`
         FROM doodle_ball_player
         WHERE platform = #{platform}
-          and openId = #{openId}
+          and open_id = #{openId}
     </select>
 
     <insert id="upsertPlayer" parameterType="com.tencent.wxcloudrun.model.DoodleBallPlayer">
@@ -25,7 +25,5 @@
                                        `registration_date`, `last_login`)
         VALUES (#{platform}, #{openId}, #{unionId}, #{achievement}, #{topScore}, #{money}, #{registrationDate},
                 #{lastLogin})
-        ON DUPLICATE KEY UPDATE achievement = #{achievement}, topScore = #{topScore}, money = #{money},
-                                last_login = #{lastLogin}
     </insert>
 </mapper>
