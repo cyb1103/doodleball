@@ -32,7 +32,7 @@ public class DoodleBallController {
      */
     @GetMapping("player")
     public ApiResponse getPlayer(@RequestHeader("x-wx-openid")String openId,
-            @RequestHeader("w-wx-unionid")String unionId,
+            @RequestHeader(value = "w-wx-unionid",required = false)String unionId,
             @RequestParam(required = false) String fields) {
         DoodleBallPlayer player = doodleBallPlayerService.getPlayerByPlatformAndOpenId(0, openId,unionId,fields);
         return ApiResponse.ok(player);
